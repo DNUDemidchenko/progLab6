@@ -14,6 +14,24 @@ double F(double x)
     return pow(x, 2 / 3);
 }
 
+double S(double x, int n)
+{
+    double sum = 0, num = 1, denom = 1;
+    for (int i = 1; i <= n; i++)
+    {
+        num = 1; denom = 1;
+        for (int j = 1; j <= i; j++)
+        {
+            num *= 2 * j - 1;
+            denom *= 2 * j;
+        }
+        num *= pow(x, 2 * i + 1);
+        denom *= 2 * i + 1;
+        sum += num / denom;
+    }
+    return x + sum;
+}
+
 int main(int argc, char* argv[])
 {
     cout << "Part 1\n";
@@ -43,4 +61,30 @@ int main(int argc, char* argv[])
     {
         cout << "x = " << i << "\ty = " << F(i) << endl;
     }
+
+    cout << "\nPart 2:\n";
+
+    double x, e;
+    cout << "Input x from range (-1; 1)\n";
+    cout << "x = ";
+    cin >> x;
+    cout << "Input accuracy\n";
+    cout << "E = ";
+    cin >> e;
+
+    cout << "Sum of first 5 elements:\nS = " << S(x, 5) << endl;
+
+    double s1 = S(x, 1);
+    double s2 = S(x, 2);
+    int count = 2;
+    while (abs(s1 - s2) > e)
+    {
+        count++;
+        s1 = s2;
+        s2 = S(x, count);
+    }
+    cout << "Sum with accuracy " << e << ":\n";
+    cout << "S = " << s2 << endl;
+    cout << "Iterations made: " << count << endl;
+    cout << "Using built in function:\narcsin(" << x << ") = " << asin(x) << endl;;
 }
