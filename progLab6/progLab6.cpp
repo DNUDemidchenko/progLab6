@@ -37,9 +37,9 @@ int main(int argc, char* argv[])
     cout << "Part 1\n";
     double a, b, h;
 
-    if (argc < 3)
+    if (argc < 4)
     {
-        cout << "Not enough arguments. Please input values:/n";
+        cout << "Not enough arguments. Please input values:\n";
         cout << "a = ";
         cin >> a;
         cout << "b = ";
